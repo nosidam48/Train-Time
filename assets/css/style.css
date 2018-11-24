@@ -1,0 +1,14 @@
+th {
+      border-right: 2px black solid;
+      text-align: center;
+    }
+
+td {
+  border-right: 2px black solid;
+      text-align: center;
+}
+
+.card-header {
+  font-weight: bold;
+  font-size: 20px;
+}
