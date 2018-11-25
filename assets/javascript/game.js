@@ -59,48 +59,29 @@ $(document).ready(function() {
     
             var tRemainder = tmin % tfreq;
 
-            var trainTime = tfreq - tRemainder;
+            var tilTrain = tfreq - tRemainder;
+
+            var trainTime = moment().add(tilTrain, "minutes");
             
     
             var newRow = $("<tr>").append(
                 $("<td>").text(ttrain),
                 $("<td>").text(tdest),
-                $("<td>").text(tfirst),
                 $("<td>").text(tfreq),
-                $("<td>").text(trainTime),
-              );
+                $("<td>").text(moment(trainTime).format("hh:mm")),
+                $("<td>").text(tilTrain),
+                $("<td class='train-remove'>").text("Remove"),
+              ); 
     
               $("#train-table > tbody").append(newRow);
+
+              $(".train-remove").on("click", function() {
+                var row = $(this).closest("tr");
+                row.remove();
+              })
           })
 
-
       });
-
-    //   database.ref().on("child_added", function(childSnapshot) {
-    //     var firstTimeConverted = moment(first, "HH:mm").subtract(1, "years");
-
-    //     var ttrain = childSnapshot.val().train;
-    //     var tdest = childSnapshot.val().dest;
-    //     var tfirst = childSnapshot.val().first;
-    //     var tfreq = childSnapshot.val().freq;
-
-    //     var tmin = moment().diff(moment(tfirst, "hh:mm"), "minutes");
-
-    //     console.log(tmin);
-
-    //     var tRemainder = tmin % tfreq;
-        
-
-    //     var newRow = $("<tr>").append(
-    //         $("<td>").text(ttrain),
-    //         $("<td>").text(tdest),
-    //         $("<td>").text(tfirst),
-    //         $("<td>").text(tfreq),
-    //         $("<td>").text(tmin),
-    //       );
-
-    //       $("#train-table > tbody").append(newRow);
-    //   })
 
     
 

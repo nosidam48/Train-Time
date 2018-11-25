@@ -1,6 +1,7 @@
 th {
       border-right: 2px black solid;
       text-align: center;
+      border-bottom: 2px black solid
     }
 
 td {
@@ -11,4 +12,30 @@ td {
 .card-header {
   font-weight: bold;
   font-size: 20px;
+  color: orange;
+  background-color: black;
+}
+
+.jumbotron {
+  color: orange;
+  background-color: black;
+}
+
+.btn {
+  color: orange;
+  background-color: black;
+}
+
+.train-remove {
+  margin-left: 35px;
+  text-align: center;
+  border-bottom: 1px #dee2e6 solid;
+}
+
+.table {
+  border: 2px black solid;
+}
+
+.name-train {
+  border-left: 2px black solid;
 }

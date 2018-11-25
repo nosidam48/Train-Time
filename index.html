@@ -11,12 +11,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
  
   <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
 </head>
 
@@ -26,7 +26,7 @@
   <div class="container">
 
     <!-- A jumbotron for a header -->
-    <div class="jumbotron jumbotron-danger" style="background-color: black; color: white">
+    <div class="jumbotron">
       <h1 class="text-center">Train Schedule</h1>
       <h3 class="text-center">A list of trains and arrival times</h3>
     </div>
@@ -42,11 +42,12 @@
             <table class="table table-sm table-hover" id='train-table'>
               <thead>
                 <tr>
-                  <th scope="col">Train Name</th>
+                  <th scope="col" class="name-train">Train Name</th>
                   <th scope="col">Destination</th>
-                  <th scope="col">First Train Time</th>
                   <th scope="col">Frequency (minutes)</th>
-                  <th scope="col">Next Arrival (minutes)</th>
+                  <th scope="col">Next Arrival</th>
+                  <th scope="col">Minutes Away</th>
+                  <th scope="col">Remove Train</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,19 +69,19 @@
             <form>
               <div class="form-group">
                 <label for="train-name">Train Name</label>
-                <input class="form-control" id="name" placeholder="Train Name" type="text">
+                <input class="form-control" id="name" placeholder="Train Name" type="text" required>
               </div>
               <div class="form-group">
                 <label for="destination-input">Destination</label>
-                <input class="form-control" id="destination" placeholder="Destination" type="text">
+                <input class="form-control" id="destination" placeholder="Destination" type="text" required>
               </div>
               <div class="form-group">
                 <label for="first-input">First Train Time</label>
-                <input class="form-control" id="first-input" placeholder="Enter First Train Time" type="text">
+                <input class="form-control" id="first-input" placeholder="Enter First Train Time" type="text" required>
               </div>
               <div class="form-group">
                 <label for="rate-input">Frequency (Minutes)</label>
-                <input class="form-control" id="rate-input" placeholder="Frequency of Arrivals" type="text">
+                <input class="form-control" id="rate-input" placeholder="Frequency of Arrivals" type="text" required>
               </div>
               <button class="btn btn-primary float-right" id="add-train-btn">Add Train</button>
             </form>
