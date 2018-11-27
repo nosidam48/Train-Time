@@ -12,21 +12,22 @@ $(document).ready(function () {
 
   var database = firebase.database();
   
-  function login() {
-  var provider = new firebase.auth.GithubAuthProvider();
+  
+  $("#log").on("click", function() {
+    var provider = new firebase.auth.GithubAuthProvider();
 
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    var token = result.credential.accessToken;
-    var user = result.user;
-    console.log(user);
-    
-  }).catch(function(error) {
-    var errorMessage = error.message;
-    console.log(errorMessage);
-    
-  });
-  }
-  $("#log").on("click", login())
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+      console.log(user);
+      
+    }).catch(function(error) {
+      var errorMessage = error.message;
+      console.log(errorMessage);
+      
+    });
+  })
+
 
   function update() {
     $(".clock").html(moment().format("D. MMM YYYY hh:mm:ss"))
