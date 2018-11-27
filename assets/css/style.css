@@ -1,3 +1,8 @@
+body {
+  background: url("https://www.tripsavvy.com/thmb/J65vD-rZxWpq-Jzp5zk_ZmNUP8k=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/Grand-Central-Station-c-Andrew-Burton-Getty-Images-57716ef63df78cb62c83b0d7.jpg") no-repeat center center fixed;
+  background-size: cover
+}
+
 th {
       border-right: 2px black solid;
       text-align: center;
@@ -17,8 +22,9 @@ td {
 }
 
 .jumbotron {
-  color: orange;
-  background-color: black;
+  color: rgba(255, 155, 0, 1);
+  background-color: rgba(0, 0, 0, .5);
+  margin-bottom: 0px;
 }
 
 .btn {
@@ -29,7 +35,8 @@ td {
 .train-remove {
   margin-left: 35px;
   text-align: center;
-  border-bottom: 1px #dee2e6 solid;
+  border-bottom: 1px rgba(0, 0, 0, .125) solid;
+  padding: 5px;
 }
 
 .table {
@@ -39,3 +46,24 @@ td {
 .name-train {
   border-left: 2px black solid;
 }
+
+.card-body {
+  background-color: rgba(255, 255, 255, .5)
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h3 {
+  font-size: 40px;
+}
+
+.clock {
+  text-align: center;
+  background-color: rgba(0, 0, 0, .5);
+  color: orange;
+  margin-bottom: 5px;
+  font-size: 40px;
+}
+
