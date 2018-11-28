@@ -30,7 +30,7 @@ $(document).ready(function () {
 
 
   function update() {
-    $(".clock").html(moment().format("D. MMM YYYY hh:mm:ss"))
+    $(".clock").html(moment().format("D, MMM YYYY hh:mm:ss"))
   }
   update();
 
