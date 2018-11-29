@@ -38,60 +38,63 @@ $(document).ready(function () {
     }
   });
 
-  
+  let numberOfTrains;
 
-//   setInterval(function() {
-//     $(".clock").html(moment().format("D, MMM YYYY hh:mm:ss"));
+  $(".clock").html(moment().format("D, MMM YYYY hh:mm:ss"));
 
-//     database.ref().once("value").then(function (snap) {
-//       snap.forEach(function (childSnapshot) {
+  database.ref().on("value", function (snapshot) {
+    numberOfTrains = snapshot.numChildren();
+    console.log(numberOfTrains);
 
-      
-    
+});
 
-//       var ttrain = childSnapshot.val().train;
-//       var tdest = childSnapshot.val().dest;
-//       var tfirst = childSnapshot.val().first;
-//       var tfreq = childSnapshot.val().freq;
+
+  setInterval(function() {
+    $(".clock").html(moment().format("D, MMM YYYY hh:mm:ss"));
+
+    database.ref().once("value").then(function (snap) {
+      snap.forEach(function (childSnapshot) {
+
+      var ttrain = childSnapshot.val().train;
+      var tdest = childSnapshot.val().dest;
+      var tfirst = childSnapshot.val().first;
+      var tfreq = childSnapshot.val().freq;
   
+      var firstTimeConverted = moment(tfirst, "HH:mm").subtract(1, "years");
   
-//       var firstTimeConverted = moment(tfirst, "HH:mm").subtract(1, "years");
-  
-//       var tmin = moment().diff(moment(firstTimeConverted, "hh:mm"), "minutes");
+      var tmin = moment().diff(moment(firstTimeConverted, "hh:mm"), "minutes");
                 
-//       let timeUntilTrain;
-//                 let nextTrainTime;
-//                 let timeRemainder;
+      let timeUntilTrain;
+                let nextTrainTime;
+                let timeRemainder;
 
-//       if (tmin < 0) {
-//         timeUntilTrain = Math.abs(timeDiff) + 1;
-//         nextTrainTime = convertedTime.format("HH:mm");
-//       }
-//       else {
-//        tRemainder = tmin % tfreq;
+      if (tmin < 0) {
+        timeUntilTrain = Math.abs(timeDiff) + 1;
+        nextTrainTime = convertedTime.format("HH:mm");
+      }
+      else {
+       tRemainder = tmin % tfreq;
   
-//        tilTrain = tfreq - tRemainder;
+       tilTrain = tfreq - tRemainder;
   
-//        trainTime = moment().add(tilTrain, "minutes");
-//       }
-//       // console.log(tmin);
+       trainTime = moment().add(tilTrain, "minutes");
+      }
+      // console.log(tmin);
   
+      $("#" + childSnapshot.val().trainNumber + "").empty();
+
+      $("#" + childSnapshot.val().trainNumber + "").append(
+        $("<td>").text(ttrain),
+        $("<td>").text(tdest),
+        $("<td>").text(tfreq),
+        $("<td data=" + childSnapshot.key + "class='next-time'>").text(moment(trainTime).format("hh:mm")),
+        $("<td data=" + childSnapshot.key + "class='minutes-til'>").text(tilTrain),
+        $("<td data=" + childSnapshot.key + " class='train-remove'>").text("Remove")
+      );
       
-
-//       $("<tr class='" + ttrain + "'>").empty();
-
-//       $("<tr class='" + ttrain + "'>").append(
-//         $("<td>").text(ttrain),
-//         $("<td>").text(tdest),
-//         $("<td>").text(tfreq),
-//         $("<td data=" + childSnapshot.key + "class='next-time'>").text(moment(trainTime).format("hh:mm")),
-//         $("<td data=" + childSnapshot.key + "class='minutes-til'>").text(tilTrain),
-//         $("<td data=" + childSnapshot.key + " class='train-remove'>").text("Remove")
-//       );
-      
-//       });
-//   });
-// }, 1000);
+      });
+  });
+}, 1000)
 
   // When the add train button is clicked
   $(".btn").on("click", function (event) {
@@ -108,7 +111,10 @@ $(document).ready(function () {
       dest: dest,
       first: first,
       freq: freq,
+      trainNumber: numberOfTrains + 1, 
     };
+    
+    
     // Push the newTrain to the firebase database
     database.ref().push(newTrain);
 
@@ -155,7 +161,9 @@ $(document).ready(function () {
       $("<td data=" + childSnapshot.key + "class='next-time'>").text(moment(trainTime).format("hh:mm")),
       $("<td data=" + childSnapshot.key + "class='minutes-til'>").text(tilTrain),
       $("<td data=" + childSnapshot.key + " class='train-remove'>").text("Remove")
-    );
+    ).attr({
+      id: childSnapshot.val().trainNumber,
+    });;
     console.log(".train-remove");
       // Append the new train to the html grid
     $("#train-table > tbody").append(newRow);
