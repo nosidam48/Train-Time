@@ -1,5 +1,5 @@
 # Train-Time
-### A train scheduling app
+### A train scheduling app using a Firebase database
 
 The user can add a train and include the first train time of the day and the amount of time between each train.
 
