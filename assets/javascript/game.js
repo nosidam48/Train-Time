@@ -28,10 +28,50 @@ $(document).ready(function () {
     });
   });
 
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+    } else {
+      // No user is signed in.
+    }
+  });
+
+  
 
   function update() {
-    $(".clock").html(moment().format("D, MMM YYYY hh:mm:ss"))
-  }
+    $(".clock").html(moment().format("D, MMM YYYY hh:mm:ss"));
+
+  //   database.ref().on(update(), function (childSnapshot) {
+
+  //     var ttrain = childSnapshot.val().train;
+  //     var tdest = childSnapshot.val().dest;
+  //     var tfirst = childSnapshot.val().first;
+  //     var tfreq = childSnapshot.val().freq;
+  
+  
+  //     var firstTimeConverted = moment(tfirst, "HH:mm").subtract(1, "years");
+  
+  //     var tmin = moment().diff(moment(firstTimeConverted, "hh:mm"), "minutes");
+  
+  //     // console.log(tmin);
+  
+  //     var tRemainder = tmin % tfreq;
+  
+  //     var tilTrain = tfreq - tRemainder;
+  
+  //     var trainTime = moment().add(tilTrain, "minutes");
+
+      
+  //     $("<td data=" + childSnapshot.key + "class='next-time'>").text(moment(trainTime).format("hh:mm"));
+      
+      
+  //     $("<td data=" + childSnapshot.key + "class='minutes-til'>").text(tilTrain);
+      
+      
+
+  // });
+}
+
   update();
 
   setInterval(update, 1000)
@@ -39,6 +79,7 @@ $(document).ready(function () {
   $(".btn").on("click", function (event) {
     event.preventDefault();
 
+    
     var train = $("#name").val().trim();
     var dest = $("#destination").val().trim();
     var first = $("#first-input").val().trim();
@@ -94,8 +135,8 @@ $(document).ready(function () {
       $("<td>").text(ttrain),
       $("<td>").text(tdest),
       $("<td>").text(tfreq),
-      $("<td class='next-time'>").text(moment(trainTime).format("hh:mm")),
-      $("<td class='minutes-til'>").text(tilTrain),
+      $("<td data=" + childSnapshot.key + "class='next-time'>").text(moment(trainTime).format("hh:mm")),
+      $("<td data=" + childSnapshot.key + "class='minutes-til'>").text(tilTrain),
       $("<td data=" + childSnapshot.key + " class='train-remove'>").text("Remove")
     );
     console.log(".train-remove");
